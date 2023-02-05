@@ -6,7 +6,7 @@ form.addEventListener('input', throttle(formDataInput, 500));
 form.addEventListener('submit', formSubmit);
 
 const keyValue = 'feedback-form-state';
-const savedItems = JSON.parse(localStorage.getItem(keyValue)) || {};
+let savedItems = JSON.parse(localStorage.getItem(keyValue)) || {};
 
 function formDataInput(event) {
   savedItems[event.target.name] = event.target.value;
@@ -23,6 +23,7 @@ function formSubmit(event) {
 
   event.currentTarget.reset();
   localStorage.removeItem(keyValue);
+  savedItems = {};
 }
 
 function readyUserData() {
